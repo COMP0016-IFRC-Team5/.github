@@ -95,7 +95,7 @@ containing the following keys:
     - 'merge': A boolean indicating whether to merge data.
     - 'slice': A boolean indicating whether to slice data.
 * 'emdat': A dictionary containing the following key:
-    - 'process': A boolean indicating whether to process EMDAT data.
+    - 'process': A boolean indicating whether to process EM-DAT data.
 
 #### Example:
 See `example.py` for details.
@@ -179,7 +179,7 @@ The country information was obtained from the DesInventar Download page
 of the countries, you need to manually go the webpage and inspect the
 hyperlinks to get its country code.
 
-For example, for Comoros, the html tag is
+For example, for the Comoros, the html tag is
 ```html
 <a href="/DesInventar/download_base.jsp?countrycode=com" target="_blank">
     Comoros
@@ -222,7 +222,7 @@ element. Here is the information you may need:
   `list(map(lambda rec: rec.as_dict(), records))` to obtain the converted
   records as a list of dictionary.
 - Finally, you can use `df = pd.DataFrame.from_dict(converted_records)` to get
-  a pandas dataframe for all of the records. The rest of the work will be done
+  a pandas dataframe for all the records. The rest of the work will be done
   by `__convert_database()` in `_main.py`.
 
 

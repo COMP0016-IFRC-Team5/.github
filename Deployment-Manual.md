@@ -5,7 +5,7 @@
 This deployment manual provides step-by-step instructions for deploying
 our application. It assumes that you have already completed the
 necessary preparations, such as setting up the networks and installing
-required softwares.
+required pieces of software.
 
 ## System Requirements
 
