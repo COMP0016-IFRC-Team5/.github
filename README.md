@@ -15,7 +15,7 @@ you can analyse the data quickly and easily.
 
 ## Installation:
 To install CIDAS, please follow the 
-[deployment manual](https://github.com/COMP0016-IFRC-Team5/.github/blob/main/Deployment-Manual.md) 
+[deployment manual](Deployment-Manual.md) 
 for detailed instructions.
 
 ## Getting Started:
