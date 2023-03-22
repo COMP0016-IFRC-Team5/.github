@@ -91,13 +91,11 @@ process(option)
 To use this module, first call `set_data_dir()` to set the data directory to be
 used by the processor. Then call `process()` with a dictionary `option`
 containing the following keys:
-```
 * 'desinventar': A dictionary containing the following keys:
     - 'merge': A boolean indicating whether to merge data.
     - 'slice': A boolean indicating whether to slice data.
 * 'emdat': A dictionary containing the following key:
     - 'process': A boolean indicating whether to process EMDAT data.
-```
 
 #### Example:
 See `example.py` for details.
