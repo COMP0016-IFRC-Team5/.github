@@ -25,13 +25,14 @@ The system is composed of three components:
 - Data Visualiser: This component visualises the processed data. It can 
   generate loss exceedance graphs and tables.
 
-This [deployment manual](../Deployment-Manual.md) provides step-by-step 
-instructions for deploying our application. It assumes that you have already 
-completed the necessary preparations, such as setting up the networks and 
-installing required pieces of software.
+This [deployment manual](https://github.com/COMP0016-IFRC-Team5/.github/blob/main/Deployment-Manual.md) 
+provides step-by-step instructions for deploying our application. It assumes 
+that you have already completed the necessary preparations, such as setting up 
+the networks and installing required pieces of software.
 
-The user manual for the CIDAS can be found [here](../User-Manual.md). This 
-manual provides instructions on how to use and customise the CIDAS.
+The user manual for the CIDAS can be found 
+[here](https://github.com/COMP0016-IFRC-Team5/.github/blob/main/User-Manual.md).
+This manual provides instructions on how to use and customise the CIDAS.
 
 
 
