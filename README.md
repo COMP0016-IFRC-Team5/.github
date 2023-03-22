@@ -14,8 +14,9 @@ you can analyse the data quickly and easily.
 - 4 GB free disk space for storing the data.
 
 ## Installation:
-To install CIDAS, please follow the deployment manual for detailed 
-instructions.
+To install CIDAS, please follow the 
+[deployment manual](https://github.com/COMP0016-IFRC-Team5/.github/Deployment-Manual.md) 
+for detailed instructions.
 
 ## Getting Started:
 - Processed data has been put into the data folder under data-visualiser. If 
