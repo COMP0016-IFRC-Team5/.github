@@ -170,4 +170,127 @@ tables = visualiser.get_exceedance_table(
 )
 ```
 
-## Customising CIDAS
+# Customising CIDAS
+
+## data-downloader
+
+### `xml_downloader`
+
+The country information was obtained from the DesInventar Download page
+(https://www.desinventar.net/download.html). If you want to maintain the list
+of the countries, you need to manually go the webpage and inspect the
+hyperlinks to get its country code.
+
+For example, for Comoros, the html tag is
+```html
+<a href="/DesInventar/download_base.jsp?countrycode=com" target="_blank">
+    Comoros
+</a>
+```
+Its country code is `com`.
+
+The code containing country information is located in
+`xml_downloader/_country_info.py`. If DesInventar adds a country in the future,
+with name `CountryName` and country code `ctn`, then you need to append `ctn`
+to the list `country_code` and append `CountryName` to the list `country_name`.
+
+### `csv_downloader`
+You can delete statement `remove_empty_databases()` in `start_clean()` function
+of `_cleaner.py` if you don't want to delete empty csv files (The contents of
+the files are not used).
+
+#### Future development
+After running `__get_country_disaster_dict()` in `_csv_crawler.py`, we have
+disaster types acquired from DesInventar. Therefore, there is no need to
+download the csv files with disaster type. However, changes need to be made for
+`categoriser` to adapt the new way of acquiring the disaster types rather than
+from disk.
+
+### `categoriser`
+Categorisation information is stored in the `_categorisations.py`. If you want
+to move some subtypes to another major type, you need to modify this file.
+
+### `record_converter`
+Currently, the record converter reads the entire xml file into the memory.
+Therefore, for large xml files like `Sri Lanka.xml` (1.2 GB), it may take more
+than 60 GB of RAM to process this file.
+
+For future development, you may want to change it to parse the file element by
+element. Here is the information you may need:
+- The records of an xml file are under `DESINVENTAR.fichas` with tag name `TR`.
+- Once you have the tag for a record, you can use `RecordFactory.from_tag()` to
+  generate a `Record` to you.
+- After you get the full list of the records, you can use
+  `list(map(lambda rec: rec.as_dict(), records))` to obtain the converted
+  records as a list of dictionary.
+- Finally, you can use `df = pd.DataFrame.from_dict(converted_records)` to get
+  a pandas dataframe for all of the records. The rest of the work will be done
+  by `__convert_database()` in `_main.py`.
+
+
+## data-processor:
+
+When implementing the algorithm for merging the records to events, we referred
+[THE HYBRID LOSS EXCEEDANCE CURVE](https://www.preventionweb.net/english/hyogo/gar/2011/en/bgdocs/ERN-AL_2011.pdf).
+In section 4.2.1 Algorithm for grouping events together. The code related to
+the implementation is located in `processor/_models/_event_builder.py` and
+`processor/_apps/_combiner.py`.
+
+### Slice
+The slicing algorithm is `__slice_for_one_event()` in
+`processor/_apps/_slicer.py`. Currently, we just slice out the first 5% of the
+events.
+
+## data-visualiser:
+
+### Add loss metrics
+Currently, we only defined deaths and affected people (directly affected +
+indirectly affected). If you want to add more metrics, you can modify it at
+`visualiser/_models/_loss.py`.
+
+### Change folder to conduct analysis
+In `visualiser/_config.py`, you can modify `__SELECTED_FOLDER` to the folder
+that you want to conduct analysis.
+
+### Change labels and highlight points
+You can find relevant code in `__add_label()` method and `__highlight()` method
+for `Plotter` class
+
+### Add new data source
+If you want to use another data source, you need to put the data source under
+the `data` directory and ensure the folder structure is:
+```text
+data-visualiser/
+├─ data/
+│  ├─ new_data_source/
+│  │  ├─ country_name/
+│  │  │  ├─ EARTHQUAKES.csv
+│  │  │  ├─ FLOODS.csv
+│  │  │  ├─ STORMS.csv
+```
+For each csv file, the data should be parsed to contain these columns: `deaths`,
+`directly_affected`, `indirectly_affected`, `start_date`, and `secondary_end`.  
+For example:
+
+| deaths | directly_affected | indirectly_affected	 | start_date | secondary_end	 |
+|--------|-------------------|----------------------|------------|----------------|
+| 0      | 100               | 200               	  | 1911-02-18 | 1911-02-21     |
+| 5      | 60                | 300               	  | 1912-02-18 | 1912-02-21     |
+| 3      | 100               | 100               	  | 1914-02-18 | 1914-02-21     |
+| 10     | 220               | 400               	  | 1916-02-18 | 1916-02-21     |
+
+Next, you need to add a member in `visualiser/_adapters/_folders.py` with value
+being the name of the data source folder.
+
+Then, you need to modify `__SELECTED_FOLDER` in `_config.py`.
+
+Note: you need to ignore or remove the labels after plot the curves if you are
+working with new data sources.
+
+# Troubleshooting
+* Check whether you have correctly set the data folder and the folder is not 
+  empty
+* Check whether you have a stable internet connection when using data-downloader
+* Check whether you have read and write access to the folder you set to be the 
+  data folder.
+* Check if you have followed README in each repository.
