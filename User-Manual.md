@@ -11,7 +11,7 @@ you can analyse the data quickly and easily.
 - Good Internet connection.
 - 8 GB RAM or higher for all modules except data-downloader.RecordsConverter. 
   64 GB RAM for data-downloader.RecordsConverter
-- 4 GB free disk space for storing the data.
+- 8 GB free disk space for storing the data.
 
 ## Installation:
 To install CIDAS, please follow the 
