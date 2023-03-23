@@ -20,7 +20,7 @@ The system is composed of three components:
   is able to convert it into a format that is compatible with the Data 
   Processor. It also can generate disaster categorisations.
 - Data Processor: This component processes data from the DesInventar and 
-  EM-DAT databases. It can aggregate the data and slice the data.
+  EM-DAT databases. It can aggregate and slice the data.
 - Data Visualiser: This component visualises the processed data. It can 
   generate loss exceedance graphs and tables.
 
